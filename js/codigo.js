@@ -1,9 +1,12 @@
-// 18.7 EJERCICIO 7
-var n = prompt('Ingrese un número: ');
-var factoorial = 1;
+// 18.8 EJERCICIO 8
+var numero = prompt('Ingrese un número: ');
 
-for (var i = 1; i <= n; i++) {
-  factoorial = factoorial * i;
+function numType(num) {
+  if ((numero % 2) == 0) {
+    return 'El numero es par';
+  } else {
+    return 'El numero es impar';
+  }
 }
 
-console.log('El factorial de ' + n + ' es: ' + factoorial);
+console.log(numType(numero));
