@@ -35,7 +35,7 @@ function muestraOculta(id) {
 }
 
 // 18.18 EJERCICIO 18
-function informacion(elEvento) {
+function tecladoymouse(elEvento) {
   var evento = elEvento || window.event;
   switch (evento.type) {
     case 'mousemove':
@@ -58,14 +58,14 @@ function informacion(elEvento) {
       }
       coordenadaXrelativa = evento.clientX;
       coordenadaYrelativa = evento.clientY;
-      muestraInformacion(['Raton', 'Navegador [' + coordenadaXrelativa + ', ' + coordenadaYrelativa + ']', 'Pagina [' + coordenadaXabsoluta + ', ' + coordenadaYabsoluta + ']']);
+      muestratecladoymouse(['Raton', 'Navegador [' + coordenadaXrelativa + ', ' + coordenadaYrelativa + ']', 'Pagina [' + coordenadaXabsoluta + ', ' + coordenadaYabsoluta + ']']);
       break;
     case 'keypress':
       document.getElementById('info').style.backgroundColor = '#CCE6FF';
       var caracter = evento.charCode || evento.keyCode;
       var letra = String.fromCharCode(caracter);
       var codigo = letra.charCodeAt(0);
-      muestraInformacion(['Teclado', 'Caracter [' + letra + ']', 'Codigo [' + codigo + ']']);
+      muestratecladoymouse(['Teclado', 'Caracter [' + letra + ']', 'Codigo [' + codigo + ']']);
       break;
     case 'click':
       document.getElementById('info').style.backgroundColor = '#FFFFCC';
@@ -73,14 +73,71 @@ function informacion(elEvento) {
   }
 }
 
-function muestraInformacion(mensaje) {
+function muestratecladoymouse(mensaje) {
   document.getElementById("info").innerHTML = '<h1>' + mensaje[0] + '</h1>';
   for (var i = 1; i < mensaje.length; i++) {
     document.getElementById("info").innerHTML += '<p>' + mensaje[i] + '</p>';
   }
 }
 
-document.onmousemove = informacion;
-document.onkeypress = informacion;
+document.onmousemove = tecladoymouse;
+document.onkeypress = tecladoymouse;
+document.onclick = tecladoymouse;
 
-document.onclick = informacion;
+// 18.19 EJERCICIO 19
+function zonaPantalla(elEvento) {
+  var evento = elEvento || window.event;
+
+  var coordenadaX = evento.clientX;
+  var coordenadaY = evento.clientY;
+
+  var dimensiones = tamanoVentanaNavegador();
+  var tamanoX = dimensiones[0];
+  var tamanoY = dimensiones[1];
+
+  var posicionHorizontal = "";
+  var posicionVertical = "";
+
+  if (coordenadaX > tamanoX / 2) {
+    posicionHorizontal = "derecha";
+  }
+  else {
+    posicionHorizontal = "izquierda";
+  }
+
+  if (coordenadaY > tamanoY / 2) {
+    posicionVertical = "abajo";
+  }
+  else {
+    posicionVertical = "arriba";
+  }
+
+  muestraZonaPantalla(['Posicion', posicionHorizontal, posicionVertical]);
+}
+
+function muestraZonaPantalla(mensaje) {
+  document.getElementById("info2").innerHTML = '<h1>' + mensaje[0] + '</h1>';
+  for (var i = 1; i < mensaje.length; i++) {
+    document.getElementById("info2").innerHTML += '<p>' + mensaje[i] + '</p>';
+  }
+}
+
+function tamanoVentanaNavegador() {
+  // Adaptada de http://www.howtocreate.co.uk/tutorials/javascript/browserwindow
+  var dimensiones = [];
+
+  if (typeof (window.innerWidth) == 'number') {
+    // No es IE
+    dimensiones = [window.innerWidth, window.innerHeight];
+  } else if (document.documentElement && (document.documentElement.clientWidth || document.documentElement.clientHeight)) {
+    //IE 6 en modo estandar (no quirks)
+    dimensiones = [document.documentElement.clientWidth, document.documentElement.clientHeight];
+  } else if (document.body && (document.body.clientWidth || document.body.clientHeight)) {
+    //IE en modo quirks
+    dimensiones = [document.body.clientWidth, document.body.clientHeight];
+  }
+
+  return dimensiones;
+}
+
+document.onclick = zonaPantalla;
