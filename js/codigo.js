@@ -177,3 +177,5 @@ function actualizaInfo(maximoCaracteres) {
     info.innerHTML = "Puedes escribir hasta "+(maximoCaracteres-elemento.value.length)+" caracteres adicionales";
   }
 }
+
+// 18.21 EJERCICIO 21
