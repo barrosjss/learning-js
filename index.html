@@ -128,12 +128,21 @@
 
   <br />
 
-  <div id="info" style="border:thin solid silver; padding:.5em; width:160px; height:160px;">
+  <div id="info1" style="border:thin solid silver; padding:.5em; width:160px; height:160px;">
   </div>
 
   <br />
 
   <div id="info2" style="border:thin solid silver; padding:.5em; width:160px; height:160px;">
+  </div>
+
+  <br />
+
+  <div style="border:thin solid silver;">
+    <div id="info">Maximo 100 caracteres</div>
+    <textarea id="texto" onkeypress="if (!window.__cfRLUnblockHandlers) return false; return limita(event, 100);"
+      onkeyup="if (!window.__cfRLUnblockHandlers) return false; actualizaInfo(100)" rows="6" cols="30"
+      data-cf-modified-4d941b6de9ee0bfc7099af7e-=""></textarea>
   </div>
 </body>
 
